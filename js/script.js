@@ -3,7 +3,9 @@ const app = new Vue({
     el: '#app',
 
     data:{
-        eMails:[]
+        eMails:[],
+        caricamento: true,
+        errore: false
     },
 
     mounted(){
@@ -13,15 +15,21 @@ const app = new Vue({
     methods:{
 
         getMail(){
-
+            this.caricamento = true;
+            this.eMails = [];
             for (let i = 0; i < 10; i++) {
                 
-                axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
+                axios.get('https://flynn.boolean.careers/exercises/api/random/maild')
                 .then((response) =>{
                     const email = response.data.response;
                     
                     console.log(email);
                     this.eMails.push(email);
+                    this.caricamento = false;
+                })
+                .catch((errore)=>{
+                    this.caricamento = false;
+                    this.errore = true;
                 })
                 
             }

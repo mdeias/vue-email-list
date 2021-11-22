@@ -9,24 +9,30 @@
     <title>Vue Email List</title>
 </head>
 <body>
+
     <div class="contenitore">
 
         <div id="app">
-            <div v-if="!errore">
 
+            
+            <div v-if="!errore">
+                
                 <ul>
                     <li v-if="!caricamento" v-for="mail in eMails">{{mail}}</li>
-                    <li v-else> Carico i risultati</li>
                 </ul>
-                
-            </div>
-            <div v-else>
-                <h1>ERRORE!</h1>
+                <h2 v-if="caricamento">Carico i risultati</h2>
             </div>
             
+            <div v-if="errore">
+                <h1>ERRORE!</h1>
+            </div>
+
+            <button v-if="!errore" @click="getMail()" class="btn">chiama mail</button>
+
         </div>
         
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
